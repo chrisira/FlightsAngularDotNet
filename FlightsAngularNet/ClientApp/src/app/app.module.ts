@@ -9,11 +9,13 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { SearchFlightsComponent } from './search-flights/search-flights.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    SearchFlightsComponent
     
   ],
   imports: [
@@ -21,7 +23,7 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: SearchFlightsComponent, pathMatch: 'full' },
 
     ])
   ],
