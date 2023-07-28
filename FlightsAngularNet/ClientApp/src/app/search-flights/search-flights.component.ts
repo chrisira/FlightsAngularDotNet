@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class SearchFlightsComponent {
 
+  SearchResult: any = [
+    'British Airlines',
+    'Kenya Airways',
+    'Rwandair',
+    'Ethiopia Airways'
+  ]
+
 }
