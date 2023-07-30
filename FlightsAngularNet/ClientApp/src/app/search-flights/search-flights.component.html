@@ -48,7 +48,7 @@
           </div>
           <input class="form-control" type="number" placeholder="1" min="1" />
           <div class="input-group-text">Passengers</div>
-          <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i>  </button>
+          <button type="submit" class="btn btn-primary" (click)="search()"><i class="fas fa-search"></i>  </button>
         </div>
 
       </div>
@@ -64,7 +64,7 @@
   <div class="card text-dark mt-5 text-center" style="background-color:cornsilk;">
     <div class="card-body">
       <strong><h6 class="card-title">{{ flights.airline }}</h6></strong>
-      <div class="card-title" style="color:brown">{{ flights.NumberOfRemainingSeats }} Remaining Seats</div>
+      <div class="card-title" style="color:brown">{{ flights.remainingNumberOfSeats }} Remaining Seats</div>
     </div>
     <div class="d-grid text-center g-2">
       <div class="row">
@@ -74,16 +74,16 @@
           </div>
           <div class="col">
             <i class="fa-solid fa-location-dot">
-              {{ flights.departure.place }}
+              {{ flights.departure?.place }}
             </i>
           </div>
           <div class="col m-2">
             <i class="fa-regular"></i>
-            {{ flights.departure.time | date }}
+            {{ flights.departure?.time | date }}
           </div>
           <div class="col m-2">
             <i class="fa-regular fa-clock"></i>
-            {{ flights.departure.time | date :'shortTime' }}
+            {{ flights.departure?.time | date :'shortTime' }}
           </div>
 
         </div>
@@ -103,16 +103,16 @@
           </div>
           <div class="col">
             <i class="fa-solid fa-location-dot">
-              {{ flights.arrival.place }}
+              {{ flights.arrival?.place }}
             </i>
           </div>
           <div class="col m-2">
             <i class="fa-regular"></i>
-            {{ flights.arrival.time | date }}
+            {{ flights.arrival?.time | date }}
           </div>
           <div class="col m-2">
             <i class="fa-regular fa-clock"></i>
-            {{ flights.arrival.time | date :'shortTime' }}
+            {{ flights.arrival?.time | date :'shortTime' }}
           </div>
         </div>
       </div>
