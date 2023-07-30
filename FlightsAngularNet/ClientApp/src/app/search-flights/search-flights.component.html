@@ -1,4 +1,65 @@
-<p>List of the flights</p>
+
+
+<h5 class="text-md-center m-5">Search for flights</h5>
+
+<div class="m-5" d-grid gap-3>
+  <div class="row m-1">
+
+    <div class="col">
+      <div class="form-floating">
+        <input type="text" class="form-control" placeholder="From" />
+        <label class="text-primary form-label">From</label>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="form-floating">
+        <input type="text" class="form-control" placeholder="Destination" />
+        <label class="text-primary form-label">To</label>
+      </div>
+    </div>
+
+  </div>
+  <div class="row m-1">
+
+    <div class="col">
+      <div class="form-floating">
+        <input type="date" class="form-control" placeholder="From" />
+        <label class="text-primary form-label">From date</label>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="form-floating">
+        <input type="date" class="form-control" placeholder="Destination" />
+        <label class="text-primary form-label">To Date</label>
+      </div>
+    </div>
+
+    <div class="row m-1">
+      <div class="col text-end">
+        <label class="text-primary form-label mt-2">Number of passengers</label>
+
+      </div>
+      <div class="col">
+        <div class="input-group">
+          <div class="input-group-text">
+            For
+          </div>
+          <input class="form-control" type="number" placeholder="1" min="1" />
+          <div class="input-group-text">Passengers</div>
+          <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i>  </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
 <div *ngFor="let flights of SearchResult">
   {{ flights }}
 </div>
