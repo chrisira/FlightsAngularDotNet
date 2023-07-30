@@ -1,10 +1,13 @@
 using Microsoft.OpenApi.Models;
+using System.ComponentModel;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
 
+// configuring the swagger server
 builder.Services.AddSwaggerGen(
     c => c.AddServer(new OpenApiServer
     {
@@ -15,6 +18,13 @@ builder.Services.AddSwaggerGen(
 
 var app = builder.Build();
 
+// adding the CORS
+
+app.UseCors(builder => builder.WithOrigins("*"));
+
+// the withOrigines("*") means that all the external applications will be able to access the .net application 
+
+// configuring the swagger UI
 app.UseSwagger().UseSwaggerUI();
 
 // Configure the HTTP request pipeline.
