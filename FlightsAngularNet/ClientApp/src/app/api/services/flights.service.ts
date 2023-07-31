@@ -18,21 +18,21 @@ export class FlightsService extends BaseService {
     super(config, http);
   }
 
-  /** Path part for operation `flightsGet()` */
-  static readonly FlightsGetPath = '/Flights';
+  /** Path part for operation `searchFlights()` */
+  static readonly SearchFlightsPath = '/Flights';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `flightsGet$Plain()` instead.
+   * To access only the response body, use `searchFlights$Plain()` instead.
    *
    * This method doesn't expect any request body.
    */
-  flightsGet$Plain$Response(
+  searchFlights$Plain$Response(
     params?: {
     },
     context?: HttpContext
   ): Observable<StrictHttpResponse<Array<FlightsRm>>> {
-    const rb = new RequestBuilder(this.rootUrl, FlightsService.FlightsGetPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, FlightsService.SearchFlightsPath, 'get');
     if (params) {
     }
 
@@ -48,32 +48,32 @@ export class FlightsService extends BaseService {
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `flightsGet$Plain$Response()` instead.
+   * To access the full response (for headers, for example), `searchFlights$Plain$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  flightsGet$Plain(
+  searchFlights$Plain(
     params?: {
     },
     context?: HttpContext
   ): Observable<Array<FlightsRm>> {
-    return this.flightsGet$Plain$Response(params, context).pipe(
+    return this.searchFlights$Plain$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<FlightsRm>>): Array<FlightsRm> => r.body)
     );
   }
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `flightsGet$Json()` instead.
+   * To access only the response body, use `searchFlights$Json()` instead.
    *
    * This method doesn't expect any request body.
    */
-  flightsGet$Json$Response(
+  searchFlights$Json$Response(
     params?: {
     },
     context?: HttpContext
   ): Observable<StrictHttpResponse<Array<FlightsRm>>> {
-    const rb = new RequestBuilder(this.rootUrl, FlightsService.FlightsGetPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, FlightsService.SearchFlightsPath, 'get');
     if (params) {
     }
 
@@ -89,16 +89,16 @@ export class FlightsService extends BaseService {
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `flightsGet$Json$Response()` instead.
+   * To access the full response (for headers, for example), `searchFlights$Json$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  flightsGet$Json(
+  searchFlights$Json(
     params?: {
     },
     context?: HttpContext
   ): Observable<Array<FlightsRm>> {
-    return this.flightsGet$Json$Response(params, context).pipe(
+    return this.searchFlights$Json$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<FlightsRm>>): Array<FlightsRm> => r.body)
     );
   }
