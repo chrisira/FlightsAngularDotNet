@@ -21,8 +21,11 @@ export class SearchFlightsComponent {
   }
 
   search() {
-    this.flightsService.flightsGet$Json({}) .subscribe(response => this.SearchResult = response);
+    this.flightsService.flightsGet$Json({}) .subscribe(response => this.SearchResult = response,this.HandleError);
     
+  }
+  private HandleError(err: any) {
+    console.log(err)
   }
 
 }
