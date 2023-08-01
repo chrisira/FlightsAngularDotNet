@@ -16,8 +16,12 @@ export class BookFlightComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(p => this.flightId = p.get("flightId") ?? "not passed");
+    this.route.paramMap.subscribe(p => this.findFlight(p.get("flightId")));
 
   }
+
+  private findFlight = (flightId: string | null) => {
+    this.flightId = flightId ?? "not passed";
+  };
 
 }
