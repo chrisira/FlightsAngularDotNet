@@ -10,12 +10,14 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { SearchFlightsComponent } from './search-flights/search-flights.component';
+import { BookFlightComponent } from './book-flight/book-flight.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    SearchFlightsComponent
+    SearchFlightsComponent,
+    BookFlightComponent
     
   ],
   imports: [
@@ -24,6 +26,8 @@ import { SearchFlightsComponent } from './search-flights/search-flights.componen
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: SearchFlightsComponent, pathMatch: 'full' },
+      { path: 'search-flight', component: SearchFlightsComponent },
+      { path: 'book-flight', component: BookFlightComponent },
 
     ])
   ],

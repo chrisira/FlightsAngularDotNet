@@ -22,7 +22,7 @@ namespace FlightsAngularNet.Controllers
             => new FlightsRm[]
             {
                 new (   Guid.NewGuid(),
-                "American Airlines",
+                "Rwandair",
                 random.Next(90, 5000).ToString(),
                 new TimePlaceRm("Los Angeles",DateTime.Now.AddHours(random.Next(1, 3))),
                 new TimePlaceRm("Istanbul",DateTime.Now.AddHours(random.Next(4, 10))),

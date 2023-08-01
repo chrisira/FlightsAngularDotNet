@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.OpenApi.Models;
 using System.ComponentModel;
 
@@ -8,13 +9,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // configuring the swagger server
-builder.Services.AddSwaggerGen(
-    c => c.AddServer(new OpenApiServer
+builder.Services.AddSwaggerGen( c =>
+
+{
+    c.AddServer(new OpenApiServer
     {
-        Description="Development Server",
-        Url= "https://localhost:7129/"
-    })
-    );
+
+        Description = "Development Server",
+        Url = "https://localhost:7129/"
+    });
+    c.CustomOperationIds(e => $"{e.ActionDescriptor.RouteValues["action"] + e.ActionDescriptor.RouteValues["controller"]}");
+});
+
 
 var app = builder.Build();
 
