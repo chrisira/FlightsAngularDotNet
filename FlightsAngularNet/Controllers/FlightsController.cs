@@ -72,9 +72,15 @@ namespace FlightsAngularNet.Controllers
 
 
         [HttpGet]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        [ProducesResponseType(typeof(FlightsRm), 200)]  
         public IEnumerable<FlightsRm> Search()
         => flights;
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(FlightsRm), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
         [HttpGet("id")]
         public ActionResult<FlightsRm> Find(Guid id)
         {
