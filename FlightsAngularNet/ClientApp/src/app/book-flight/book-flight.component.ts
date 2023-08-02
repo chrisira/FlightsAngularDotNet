@@ -28,7 +28,16 @@ export class BookFlightComponent implements OnInit {
   private findFlight = (flightId: string | null) => {
     this.flightId = flightId ?? "not passed";
 
-    this.flightservice.findFlights$Json({ id: this.flightId }).subscribe(flight => this.flight = flight);
+    this.flightservice.findFlights$Json({ id: this.flightId }).subscribe(flight => this.flight = flight, this.HandleError);
   };
+
+  private HandleError(err: any) {
+    if (err.status == 404) {
+      alert("The flight is not found!");
+    }
+    console.log("error status code " + err.status);
+    console.log("error status Message " + err.statusText);
+    console.log(err)
+  }
 
 }
