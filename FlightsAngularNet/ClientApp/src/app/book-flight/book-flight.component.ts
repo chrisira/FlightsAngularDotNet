@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { FlightsService } from '../api/services/flights.service';
 import { FlightsRm } from '../api/models'
 
@@ -15,7 +15,7 @@ export class BookFlightComponent implements OnInit {
   flight: FlightsRm = {}
 
 
-  constructor(private route: ActivatedRoute,private flightservice:FlightsService) {
+  constructor(private route: ActivatedRoute,private flightservice:FlightsService, private router:Router) {
 
   }
   
@@ -31,9 +31,10 @@ export class BookFlightComponent implements OnInit {
     this.flightservice.findFlights$Json({ id: this.flightId }).subscribe(flight => this.flight = flight, this.HandleError);
   };
 
-  private HandleError(err: any) {
-    if (err.status == 404) {
+  private HandleError = (err: any) => {
+    if (err.status == 404 || err.status==400) {
       alert("The flight is not found!");
+      this.router.navigate(['/search-flight'])
     }
     console.log("error status code " + err.status);
     console.log("error status Message " + err.statusText);
