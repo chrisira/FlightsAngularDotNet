@@ -103,4 +103,51 @@ export class FlightsService extends BaseService {
     );
   }
 
+  /** Path part for operation `findFlights()` */
+  static readonly FindFlightsPath = '/Flights/id';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findFlights()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findFlights$Response(
+    params?: {
+      id?: string;
+    },
+    context?: HttpContext
+  ): Observable<StrictHttpResponse<void>> {
+    const rb = new RequestBuilder(this.rootUrl, FlightsService.FindFlightsPath, 'get');
+    if (params) {
+      rb.query('id', params.id, {});
+    }
+
+    return this.http.request(
+      rb.build({ responseType: 'text', accept: '*/*', context })
+    ).pipe(
+      filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `findFlights$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findFlights(
+    params?: {
+      id?: string;
+    },
+    context?: HttpContext
+  ): Observable<void> {
+    return this.findFlights$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
+    );
+  }
+
 }
