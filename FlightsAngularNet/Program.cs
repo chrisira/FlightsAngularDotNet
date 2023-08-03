@@ -26,7 +26,10 @@ var app = builder.Build();
 
 // adding the CORS
 
-app.UseCors(builder => builder.WithOrigins("*"));
+app.UseCors(builder => builder
+.WithOrigins("*")
+.AllowAnyMethod()
+.AllowAnyHeader());
 
 // the withOrigines("*") means that all the external applications will be able to access the .net application 
 
