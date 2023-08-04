@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using FlightsAngularNet.DTOS;
+using FlightsAngularNet.ReadModels;
+
 namespace FlightsAngularNet.Controllers
 {
     [Route("[controller]")]
@@ -16,7 +18,29 @@ namespace FlightsAngularNet.Controllers
         {
             Passengers.Add(dto);
             System.Diagnostics.Debug.WriteLine(Passengers.Count);
-            return Ok();
+            return CreatedAtAction(nameof(Find),new { email = dto.Email });
         }
+
+        // adding a find action result to search for a passenger using email
+        [HttpGet("{email}")]
+        public ActionResult<PassengerRm> Find(string email)
+        {
+            var passenger = Passengers.FirstOrDefault(p => p.Email == email);
+            if (passenger == null)
+            {
+                return NotFound();
+                   
+            }
+            var rm = new PassengerRm(
+                passenger.Email,
+                passenger.FirstName,
+                passenger.LastName,
+                passenger.Gender
+                
+                );
+            return Ok(rm);
+
+        }
+
     }
 }
