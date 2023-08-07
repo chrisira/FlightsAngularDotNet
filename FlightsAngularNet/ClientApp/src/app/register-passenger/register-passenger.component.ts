@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PassengerService } from '../api/services/passenger.service';
 import { FormBuilder } from '@angular/forms'
 import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-passenger',
@@ -11,7 +12,7 @@ import { AuthService } from '../auth/auth.service';
 export class RegisterPassengerComponent implements OnInit {
 
   constructor(private passengerService: PassengerService, private fb: FormBuilder
-  ,private authService:AuthService) {
+  ,private authService:AuthService,private router:Router) {
 
   }
   form = this.fb.group({
@@ -24,7 +25,11 @@ export class RegisterPassengerComponent implements OnInit {
 
   checkPassenger(): void {
     const params = { email: this.form.get('email')?.value! }
-    this.passengerService.findPassenger$Json(params).subscribe(this.login);
+    this.passengerService.findPassenger$Json(params).subscribe(this.login, e => {
+      if (e.status != 404) {
+        console.error(e)
+      }
+    });
   }
         
     
@@ -37,6 +42,7 @@ export class RegisterPassengerComponent implements OnInit {
 
   login = () => {
     this.authService.loginUser({ email: this.form.get('email')?.value! })
+    this.router.navigate(['/search-flight'])
 
   }
 
