@@ -24,8 +24,7 @@ export class RegisterPassengerComponent implements OnInit {
 
   checkPassenger(): void {
     const params = { email: this.form.get('email')?.value! }
-    this.passengerService.findPassenger$Json(params).subscribe(_ => console.log("passenger exists, logging in now"))
-    this.authService.loginUser({email : this.form.get('email')?.value!})
+    this.passengerService.findPassenger$Json(params).subscribe(this.login);
   }
         
     
@@ -33,7 +32,12 @@ export class RegisterPassengerComponent implements OnInit {
     
     //console.log("Form values :",this.form.value)
     this.passengerService.registerPassenger({ body: this.form.value })
-      .subscribe(_ => this.authService.loginUser({ email: this.form.get('email')?.value!}),console.error);
+      .subscribe(this.login, console.error);
+  }
+
+  login = () => {
+    this.authService.loginUser({ email: this.form.get('email')?.value! })
+
   }
 
 }
