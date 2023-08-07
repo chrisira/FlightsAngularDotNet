@@ -21,6 +21,12 @@ export class RegisterPassengerComponent implements OnInit {
     isFemale: [true]
   })
   ngOnInit(): void { }
+
+  checkPassenger(): void {
+    const params = { email: this.form.get('email')?.value! }
+    this.passengerService.findPassenger$Json(params).subscribe(_ => console.log("passenger exists, logging in now"))
+    this.authService.loginUser({email : this.form.get('email')?.value!})
+  }
         
     
   register() {
