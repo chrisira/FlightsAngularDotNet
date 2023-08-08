@@ -55,17 +55,20 @@
         </div>
       </div>
     </div>
-    <div class="col">
-      <div class="input-group">
-        <div class="input-group-text">
-          Seats For
+    <form [formGroup]="form" (ngSubmit)="book()">
+      <div class="col">
+        <div class="input-group">
+          <div class="input-group-text">
+            Seats For
+          </div>
+          <input formControlName='number' class="form-control" type="number" placeholder="1" min="1" />
+          <div class="input-group-text">Passenger(s)</div>
+          <button type="submit" class="btn btn-primary"><i class="fas fa-ticket"></i> book  </button>
         </div>
-        <input class="form-control" type="number" placeholder="1" min="1" />
-        <div class="input-group-text">Passenger(s)</div>
-        <button type="submit" class="btn btn-primary"><i class="fas fa-ticket"></i> book  </button>
-      </div>
 
-    </div>
+      </div>
+    </form>
+
   </div>
 
 </div>
