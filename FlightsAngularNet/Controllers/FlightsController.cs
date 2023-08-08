@@ -1,4 +1,5 @@
-﻿using FlightsAngularNet.ReadModels;
+﻿using FlightsAngularNet.DTOS;
+using FlightsAngularNet.ReadModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -65,6 +66,8 @@ namespace FlightsAngularNet.Controllers
 
             };
 
+        private static IList<BookDto> Bookings = new List<BookDto>();
+
     public FlightsController(ILogger<FlightsController> logger)
         {
             _logger = logger;
@@ -93,6 +96,13 @@ namespace FlightsAngularNet.Controllers
 
             return Ok(flight);
             
+        }
+
+        [HttpPost]
+        public void Book(BookDto dto)
+        {
+            System.Diagnostics.Debug.WriteLine($"booking a new flight {dto.FlightId}");
+            Bookings.Add(dto);
         }
 
         
