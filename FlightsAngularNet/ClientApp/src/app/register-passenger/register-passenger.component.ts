@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PassengerService } from '../api/services/passenger.service';
-import { FormBuilder } from '@angular/forms'
+import { FormBuilder,Validators } from '@angular/forms'
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 
@@ -16,10 +16,10 @@ export class RegisterPassengerComponent implements OnInit {
 
   }
   form = this.fb.group({
-    email: [''],
-    firstName: [''],
-    lastName: [''],
-    isFemale: [true]
+    email: ['', Validators.compose([Validators.required, Validators.email, Validators.min(3), Validators.max(254)])],
+    firstName: ['', Validators.compose([Validators.required, Validators.min(3), Validators.max(254)])],
+    lastName: ['', Validators.compose([Validators.required, Validators.min(3), Validators.max(254)])],
+    isFemale: [true, Validators.required]
   })
   ngOnInit(): void { }
 
@@ -34,6 +34,9 @@ export class RegisterPassengerComponent implements OnInit {
         
     
   register() {
+    if (this.form.invalid) {
+      return;
+    }
     
     //console.log("Form values :",this.form.value)
     this.passengerService.registerPassenger({ body: this.form.value })
@@ -45,5 +48,20 @@ export class RegisterPassengerComponent implements OnInit {
     this.router.navigate(['/search-flight'])
 
   }
+
+  get formEmail() {
+    return this.form.controls.email;
+  }
+  get formFirstName() {
+    return this.form.controls.firstName;
+  }
+  get formLastName() {
+    return this.form.controls.lastName;
+  }
+  get formGender() {
+    return this.form.controls.isFemale;
+  }
+
+
 
 }
