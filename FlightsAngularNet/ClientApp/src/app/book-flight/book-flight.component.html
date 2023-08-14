@@ -61,7 +61,7 @@
           <div class="input-group-text">
             Seats For
           </div>
-          <input formControlName='number' class="form-control" type="number" placeholder="1" min="1" />
+          <input formControlName='number' class="form-control" type="number" placeholder="enter number"/>
           <div class="input-group-text">Passenger(s)</div>
           <button type="submit" class="btn btn-primary"><i class="fas fa-ticket"></i> book  </button>
         </div>
@@ -71,4 +71,7 @@
 
   </div>
 
+</div>
+<div *ngIf="form.controls.number.invalid" class="alert alert-danger d-block m-2">
+  The number of seats is invalid
 </div>
