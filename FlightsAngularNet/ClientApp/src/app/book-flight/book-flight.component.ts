@@ -23,7 +23,7 @@ export class BookFlightComponent implements OnInit {
   }
 
   form = this.fb.group({
-    number: [1, Validators.required]
+    number: [1, Validators.compose([Validators.required, Validators.min(1), Validators.max(254)])]
   })
   
 
@@ -65,6 +65,11 @@ export class BookFlightComponent implements OnInit {
     this.flightservice.bookFlights({ body: booking }).subscribe(_ => this.router.navigate(["/my-booking"]), this.HandleError)
     
   }
-  
+
+  // creating a getter for getting the number
+
+  get number() {
+    return this.form.controls.number;
+  }
 
 }
