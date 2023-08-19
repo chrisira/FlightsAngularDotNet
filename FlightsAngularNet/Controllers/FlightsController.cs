@@ -105,7 +105,7 @@ namespace FlightsAngularNet.Controllers
         [ProducesResponseType(200)]
         public IActionResult Book(BookDto dto)
         {
-            System.Diagnostics.Debug.WriteLine($"booking a new flight {dto.FlightId}");
+            System.Diagnostics.Debug.WriteLine($"booking  new flight {dto.FlightId}");
             var flight = flights.Any(f => f.Id == dto.FlightId);
 
             if(flight == false)
@@ -119,5 +119,5 @@ namespace FlightsAngularNet.Controllers
         
 
         
-    }
+    
 }
