@@ -67,7 +67,7 @@ namespace FlightsAngularNet.Controllers
 
             };
 
-        private static IList<BookDto> Bookings = new List<BookDto>();
+        
 
         public FlightsController(ILogger<FlightsController> logger)
         {
@@ -126,13 +126,18 @@ namespace FlightsAngularNet.Controllers
         public IActionResult Book(BookDto dto)
         {
             System.Diagnostics.Debug.WriteLine($"booking  new flight {dto.FlightId}");
-            var flight = flights.Any(f => f.Id == dto.FlightId);
+            var flight = flights.SingleOrDefault(f => f.Id == dto.FlightId);
 
-            if (flight == false)
+            if (flight == null)
             {
                 return NotFound();
             }
-            Bookings.Add(dto);
+            flight.Bookings.Add(
+                new Bookings(
+                    dto.FlightId,
+                    dto.PassengerEmail,
+                    dto.NumberOfSeats
+                    ));
             return CreatedAtAction(nameof(Find), new { id = dto.FlightId });
         }
 

@@ -8,6 +8,9 @@
         TimePlace Arrival,
         int RemainingNumberOfSeats
         
-        );
+        )
+    {
+        public IList<Bookings> Bookings = new List<Bookings>();
+    }
    
 }
