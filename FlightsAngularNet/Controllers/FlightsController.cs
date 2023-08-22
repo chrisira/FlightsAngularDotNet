@@ -80,7 +80,18 @@ namespace FlightsAngularNet.Controllers
         [ProducesResponseType(500)]
         [ProducesResponseType(typeof(IEnumerable<FlightsRm>), 200)]
         public IEnumerable<FlightsRm> Search()
-        => flights;
+        {
+            var FlightRmList = flights.Select(flight => new FlightsRm(
+                flight.Id,
+                flight.Price,
+                flight.Airline,
+                new TimePlaceRm(flight.Departure.Place.ToString(), flight.Departure.Time),
+                new TimePlaceRm(flight.Arrival.Place.ToString(), flight.Arrival.Time),
+                flight.RemainingNumberOfSeats
+                ));
+            return FlightRmList;
+        }
+     
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         [ProducesResponseType(typeof(FlightsRm), 200)]
