@@ -21,7 +21,7 @@ namespace FlightsAngularNet.Controllers
                 random.Next(90, 5000).ToString(),
                 new TimePlace("Los Angeles", DateTime.Now.AddHours(random.Next(1, 3))),
                 new TimePlace("Istanbul", DateTime.Now.AddHours(random.Next(4, 10))),
-                    random.Next(1, 853)),
+                    2),
         new (Guid.NewGuid(),
                 "Deutsche BA",
                 random.Next(90, 5000).ToString(),
@@ -132,12 +132,19 @@ namespace FlightsAngularNet.Controllers
             {
                 return NotFound();
             }
+
+            //added domain validation rule to avoid overbooking
+            if(flight.RemainingNumberOfSeats < dto.NumberOfSeats)
+            {
+                return Conflict(new {message = "The number of requested of seats exceeds the remaining seats"});  
+            }
             flight.Bookings.Add(
                 new Bookings(
                     dto.FlightId,
                     dto.PassengerEmail,
                     dto.NumberOfSeats
                     ));
+            flight.RemainingNumberOfSeats -= dto.NumberOfSeats;
             return CreatedAtAction(nameof(Find), new { id = dto.FlightId });
         }
 
