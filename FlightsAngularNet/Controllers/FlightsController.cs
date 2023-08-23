@@ -1,4 +1,5 @@
 ﻿using FlightsAngularNet.Domain.Entities;
+using FlightsAngularNet.Domain.Errors;
 using FlightsAngularNet.DTOS;
 using FlightsAngularNet.ReadModels;
 using Microsoft.AspNetCore.Mvc;
@@ -133,7 +134,12 @@ namespace FlightsAngularNet.Controllers
                 return NotFound();
             }
             // calling the makeBooking method from the entity
-            flight.MakeBooking(dto.PassengerEmail, dto.NumberOfSeats);
+           var error =  flight.MakeBooking(dto.PassengerEmail, dto.NumberOfSeats);
+            if(error is OverBookError)
+            {
+                return Conflict(new { message = "not enough seats" });
+
+            }
             return CreatedAtAction(nameof(Find), new { id = dto.FlightId });
         }
 

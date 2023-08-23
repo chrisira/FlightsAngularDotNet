@@ -1,4 +1,6 @@
-﻿namespace FlightsAngularNet.Domain.Entities
+﻿using FlightsAngularNet.Domain.Errors;
+
+namespace FlightsAngularNet.Domain.Entities
 {
     public record Flights(
         Guid Id,
@@ -15,13 +17,14 @@
 
         
 
-         internal void MakeBooking(string passengerEmail,byte numberOfSeats)
+         public object? MakeBooking(string passengerEmail,byte numberOfSeats)
         {
             var flight = this;
             //added domain validation rule to avoid overbooking
             if (flight.RemainingNumberOfSeats < numberOfSeats)
             {
-                return Conflict(new { message = "The number of requested of seats exceeds the remaining seats" });
+                return new OverBookError();
+                
             }
             flight.Bookings.Add(
                 new Bookings(
@@ -29,6 +32,7 @@
                     numberOfSeats
                     ));
             flight.RemainingNumberOfSeats -= numberOfSeats;
+            return null;
         }
     }
    
