@@ -132,18 +132,8 @@ namespace FlightsAngularNet.Controllers
             {
                 return NotFound();
             }
-
-            //added domain validation rule to avoid overbooking
-            if(flight.RemainingNumberOfSeats < dto.NumberOfSeats)
-            {
-                return Conflict(new {message = "The number of requested of seats exceeds the remaining seats"});  
-            }
-            flight.Bookings.Add(
-                new Bookings(
-                    dto.PassengerEmail,
-                    dto.NumberOfSeats
-                    ));
-            flight.RemainingNumberOfSeats -= dto.NumberOfSeats;
+            // calling the makeBooking method from the entity
+            flight.MakeBooking(dto.PassengerEmail, dto.NumberOfSeats);
             return CreatedAtAction(nameof(Find), new { id = dto.FlightId });
         }
 
