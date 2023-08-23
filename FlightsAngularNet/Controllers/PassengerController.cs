@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using FlightsAngularNet.DTOS;
 using FlightsAngularNet.ReadModels;
 using FlightsAngularNet.Domain.Entities;
+using FlightsAngularNet.Data;
 
 namespace FlightsAngularNet.Controllers
 {
@@ -10,20 +11,20 @@ namespace FlightsAngularNet.Controllers
     [ApiController]
     public class PassengerController : ControllerBase
     {
-        static private IList<Passenger> Passengers = new List<Passenger>();
+        
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         public IActionResult Register(NewPassengerDto dto)
         {
-            Passengers.Add(
+            Entities.Passengers.Add(
                 new Passenger(
                     dto.Email,
                     dto.FirstName,
                     dto.LastName,
                     dto.Gender));
-            System.Diagnostics.Debug.WriteLine(Passengers.Count);
+            System.Diagnostics.Debug.WriteLine(Entities.Passengers.Count);
             return CreatedAtAction(nameof(Find),new { email = dto.Email });
         }
 
@@ -31,7 +32,7 @@ namespace FlightsAngularNet.Controllers
         [HttpGet("{email}")]
         public ActionResult<PassengerRm> Find(string email)
         {
-            var passenger = Passengers.FirstOrDefault(p => p.Email == email);
+            var passenger = Entities.Passengers.FirstOrDefault(p => p.Email == email);
             if (passenger == null)
             {
                 return NotFound();
