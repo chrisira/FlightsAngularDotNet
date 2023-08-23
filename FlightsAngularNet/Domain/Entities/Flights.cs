@@ -12,6 +12,24 @@
     {
         public IList<Bookings> Bookings = new List<Bookings>();
         public int RemainingNumberOfSeats { get; set; } = RemainingNumberOfSeats;
+
+        
+
+         internal void MakeBooking(string passengerEmail,byte numberOfSeats)
+        {
+            var flight = this;
+            //added domain validation rule to avoid overbooking
+            if (flight.RemainingNumberOfSeats < numberOfSeats)
+            {
+                return Conflict(new { message = "The number of requested of seats exceeds the remaining seats" });
+            }
+            flight.Bookings.Add(
+                new Bookings(
+                    passengerEmail,
+                    numberOfSeats
+                    ));
+            flight.RemainingNumberOfSeats -= numberOfSeats;
+        }
     }
    
 }

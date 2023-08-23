@@ -139,7 +139,7 @@ namespace FlightsAngularNet.Controllers
                 return Conflict(new {message = "The number of requested of seats exceeds the remaining seats"});  
             }
             flight.Bookings.Add(
-                new Bookings
+                new Bookings(
                     dto.PassengerEmail,
                     dto.NumberOfSeats
                     ));
