@@ -9,7 +9,7 @@ namespace FlightsAngularNet.Data
 
         static Random random = new Random();
 
-        public static Flights[] Flights = new Flights[]
+        public  Flights[] Flights = new Flights[]
             {
                 new (Guid.NewGuid(),
                 "Rwandair",

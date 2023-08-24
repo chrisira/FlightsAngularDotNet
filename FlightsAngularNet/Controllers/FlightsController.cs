@@ -14,13 +14,14 @@ namespace FlightsAngularNet.Controllers
     {
 
         private readonly ILogger<FlightsController> _logger;
-        private static readonly Entities Entities = new Entities();
+        private readonly Entities _entities;
 
 
 
-        public FlightsController(ILogger<FlightsController> logger)
+        public FlightsController(ILogger<FlightsController> logger,Entities entities)
         {
             _logger = logger;
+            _entities = entities;
         }
 
 
@@ -30,7 +31,7 @@ namespace FlightsAngularNet.Controllers
         [ProducesResponseType(typeof(IEnumerable<FlightsRm>), 200)]
         public IEnumerable<FlightsRm> Search()
         {
-            var FlightRmList = Entities.Flights.Select(flight => new FlightsRm(
+            var FlightRmList = _entities.Flights.Select(flight => new FlightsRm(
                 flight.Id,
                 flight.Price,
                 flight.Airline,
@@ -48,7 +49,7 @@ namespace FlightsAngularNet.Controllers
         [HttpGet("id")]
         public ActionResult<FlightsRm> Find(Guid id)
         {
-            var flight = Entities.Flights.SingleOrDefault(f => f.Id == id);
+            var flight = _entities.Flights.SingleOrDefault(f => f.Id == id);
 
             if (flight == null)
             {
@@ -75,7 +76,7 @@ namespace FlightsAngularNet.Controllers
         public IActionResult Book(BookDto dto)
         {
             System.Diagnostics.Debug.WriteLine($"booking  new flight {dto.FlightId}");
-            var flight = Entities.Flights.SingleOrDefault(f => f.Id == dto.FlightId);
+            var flight = _entities.Flights.SingleOrDefault(f => f.Id == dto.FlightId);
 
             if (flight == null)
             {
