@@ -5,7 +5,7 @@ namespace FlightsAngularNet.Data
 {
     public class Entities
     {
-        static public IList<Passenger> Passengers = new List<Passenger>();
+         public IList<Passenger> Passengers = new List<Passenger>();
 
         static Random random = new Random();
 

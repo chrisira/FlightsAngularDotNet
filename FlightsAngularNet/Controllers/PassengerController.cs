@@ -11,6 +11,7 @@ namespace FlightsAngularNet.Controllers
     [ApiController]
     public class PassengerController : ControllerBase
     {
+        private static readonly Entities Entities = new Entities();
         
         [HttpPost]
         [ProducesResponseType(201)]

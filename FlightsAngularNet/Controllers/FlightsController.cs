@@ -14,7 +14,9 @@ namespace FlightsAngularNet.Controllers
     {
 
         private readonly ILogger<FlightsController> _logger;
-        static Random random = new Random();
+        private static readonly Entities Entities = new Entities();
+
+
 
         public FlightsController(ILogger<FlightsController> logger)
         {

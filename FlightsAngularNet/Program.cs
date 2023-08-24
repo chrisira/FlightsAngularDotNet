@@ -1,3 +1,4 @@
+using FlightsAngularNet.Data;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.OpenApi.Models;
 using System.ComponentModel;
@@ -21,7 +22,7 @@ builder.Services.AddSwaggerGen( c =>
     c.CustomOperationIds(e => $"{e.ActionDescriptor.RouteValues["action"] + e.ActionDescriptor.RouteValues["controller"]}");
 });
 
-
+builder.Services.AddSingleton<Entities>();
 var app = builder.Build();
 
 // adding the CORS
