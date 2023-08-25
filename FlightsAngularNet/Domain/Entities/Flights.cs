@@ -10,9 +10,17 @@ namespace FlightsAngularNet.Domain.Entities
         public String Price { get; set; }
         public TimePlace Departure { get; set; }
         public TimePlace Arrival { get; set; }   
-        public int RemainingNumberOfSeats { get; set; } 
+        public int RemainingNumberOfSeats { get; set; }
 
-        
+        public IList<Bookings> Bookings = new List<Bookings>();
+
+        // constructor with no parameters
+        public Flights()
+        {
+            
+        }
+
+        // constructor with parameters
         public Flights(
         Guid id,
         String airline,
@@ -33,11 +41,7 @@ namespace FlightsAngularNet.Domain.Entities
 
             
         }
-        public IList<Bookings> Bookings = new List<Bookings>();
         
-
-
-
          public object? MakeBooking(string passengerEmail,byte numberOfSeats)
         {
             var flight = this;
