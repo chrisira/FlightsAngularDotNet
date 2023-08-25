@@ -2,20 +2,41 @@
 
 namespace FlightsAngularNet.Domain.Entities
 {
-    public record Flights(
-        Guid Id,
-        String Airline,
-        String Price,
-        TimePlace Departure,
-        TimePlace Arrival,
-        int RemainingNumberOfSeats
-        
-        )
+    public class Flights
     {
-        public IList<Bookings> Bookings = new List<Bookings>();
-        public int RemainingNumberOfSeats { get; set; } = RemainingNumberOfSeats;
+        
+        public Guid Id { get; set; }
+        public String Airline { get; set; } 
+        public String Price { get; set; }
+        public TimePlace Departure { get; set; }
+        public TimePlace Arrival { get; set; }   
+        public int RemainingNumberOfSeats { get; set; } 
 
         
+        public Flights(
+        Guid id,
+        String airline,
+        String price,
+        TimePlace departure,
+        TimePlace arrival,
+        int remainingNumberOfSeats
+
+        )
+        {
+            Id = id;    
+            Airline = airline;  
+            Price = price;  
+            Departure = departure;  
+            Arrival = arrival;  
+            RemainingNumberOfSeats = remainingNumberOfSeats;
+            
+
+            
+        }
+        public IList<Bookings> Bookings = new List<Bookings>();
+        
+
+
 
          public object? MakeBooking(string passengerEmail,byte numberOfSeats)
         {
