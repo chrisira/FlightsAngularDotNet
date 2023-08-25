@@ -16,6 +16,7 @@ namespace FlightsAngularNet.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Passenger>().HasKey(p => p.Email);
+            modelBuilder.Entity<Flights>().Property(p=> p.RemainingNumberOfSeats).IsConcurrencyToken(); 
             modelBuilder.Entity<Flights>().OwnsOne(f => f.Departure);
             modelBuilder.Entity<Flights>().OwnsOne(f => f.Arrival);
         }
