@@ -1,12 +1,13 @@
 ﻿using FlightsAngularNet.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace FlightsAngularNet.Data
 {
-    public class Entities
+    public class Entities:DbContext
     {
-         public IList<Passenger> Passengers = new List<Passenger>();
-         public List<Flights> Flights = new List<Flights>();
+         public DbSet<Passenger> Passengers => Set<Passenger>();
+         public DbSet<Flights> Flights => Set<Flights>();
             
     }
 }
