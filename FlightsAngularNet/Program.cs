@@ -1,10 +1,18 @@
 using FlightsAngularNet.Data;
 using FlightsAngularNet.Domain.Entities;
 using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.ComponentModel;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add dbcontext
+builder.Services.AddDbContext<Entities>(options =>
+options.UseInMemoryDatabase(databaseName: "Flights"),
+ServiceLifetime.Singleton
+
+) ;
 
 // Add services to the container.
 
@@ -86,6 +94,8 @@ Flights[] flightsToSeed = new Flights[]
 
 };
 entities.Flights.AddRange(flightsToSeed);
+
+entities.SaveChanges();
 
 
 // adding the CORS
