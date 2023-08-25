@@ -4,6 +4,7 @@ using FlightsAngularNet.Domain.Errors;
 using FlightsAngularNet.DTOS;
 using FlightsAngularNet.ReadModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace FlightsAngularNet.Controllers
@@ -89,7 +90,16 @@ namespace FlightsAngularNet.Controllers
                 return Conflict(new { message = "not enough seats" });
 
             }
-            _entities.SaveChanges();
+            try
+            {
+                _entities.SaveChanges();
+            }
+            catch(DbUpdateConcurrencyException e)
+            {
+                return Conflict(new { message = "An error occured while trying to book the seat, try again later" });
+
+            }
+            
             return CreatedAtAction(nameof(Find), new { id = dto.FlightId });
         }
 
