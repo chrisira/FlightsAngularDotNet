@@ -89,6 +89,7 @@ namespace FlightsAngularNet.Controllers
                 return Conflict(new { message = "not enough seats" });
 
             }
+            _entities.SaveChanges();
             return CreatedAtAction(nameof(Find), new { id = dto.FlightId });
         }
 

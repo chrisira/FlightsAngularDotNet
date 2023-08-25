@@ -10,9 +10,16 @@ namespace FlightsAngularNet.Data
         public DbSet<Flights> Flights => Set<Flights>();
         public Entities(DbContextOptions<Entities> options):base(options)
         {
+            
                 
         }
-      
-            
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Passenger>().HasKey(p => p.Email);
+            modelBuilder.Entity<Flights>().OwnsOne(f => f.Departure);
+            modelBuilder.Entity<Flights>().OwnsOne(f => f.Arrival);
+        }
+
+
     }
 }
