@@ -4,6 +4,7 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
+import { BookingService } from './services/booking.service';
 import { FlightsService } from './services/flights.service';
 import { PassengerService } from './services/passenger.service';
 
@@ -15,6 +16,7 @@ import { PassengerService } from './services/passenger.service';
   exports: [],
   declarations: [],
   providers: [
+    BookingService,
     FlightsService,
     PassengerService,
     ApiConfiguration
