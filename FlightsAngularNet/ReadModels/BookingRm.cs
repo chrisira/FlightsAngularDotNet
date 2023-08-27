@@ -3,7 +3,7 @@
     public record BookingRm
     (
         Guid FlighItd,
-        string Airling,
+        string Airline,
         string Price,
         TimePlaceRm Arrival,
         TimePlaceRm Departure,
