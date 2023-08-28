@@ -23,11 +23,23 @@
           <li class="nav-item"
               [routerLinkActive]="['link-active']"
               [routerLinkActiveOptions]="{ exact: true }">
-            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+            <a class="nav-link text-dark" [routerLink]="['/']">
+              <i class="fas fa-home"></i>
+              Home
+            </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link text-dark" [routerLink]="['/my-booking']">My bookings</a>
+            <a class="nav-link text-dark" [routerLink]="['/my-booking']">
+              <i class="fas fa-book"></i>
+              My bookings
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-dark" [routerLink]="['/register-passenger']">
+            <i class="fas fa-user-circle"></i>
+            Switch Passenger</a>
           </li>
 
 
