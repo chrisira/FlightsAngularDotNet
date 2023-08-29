@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PassengerService } from '../api/services/passenger.service';
 import { FormBuilder,Validators } from '@angular/forms'
 import { AuthService } from '../auth/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-register-passenger',
@@ -12,16 +12,21 @@ import { Router } from '@angular/router';
 export class RegisterPassengerComponent implements OnInit {
 
   constructor(private passengerService: PassengerService, private fb: FormBuilder
-  ,private authService:AuthService,private router:Router) {
+    , private authService: AuthService, private router: Router,
+  private activatedRoute:ActivatedRoute) {
 
   }
+  requestedUrl?: string =undefined
   form = this.fb.group({
     email: ['', Validators.compose([Validators.required, Validators.email, Validators.min(3), Validators.max(254)])],
     firstName: ['', Validators.compose([Validators.required, Validators.min(3), Validators.max(254)])],
     lastName: ['', Validators.compose([Validators.required, Validators.min(3), Validators.max(254)])],
     isFemale: [true, Validators.required]
   })
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe(p => this.requestedUrl = p['requestedUrl'])
+
+  }
 
   checkPassenger(): void {
     const params = { email: this.form.get('email')?.value! }
@@ -45,7 +50,7 @@ export class RegisterPassengerComponent implements OnInit {
 
   login = () => {
     this.authService.loginUser({ email: this.form.get('email')?.value! })
-    this.router.navigate(['/search-flight'])
+    this.router.navigate([this.requestedUrl ?? '/search-flight'])
 
   }
 
