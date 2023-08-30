@@ -19,6 +19,7 @@ namespace FlightsAngularNet.Data
             modelBuilder.Entity<Flights>().Property(p=> p.RemainingNumberOfSeats).IsConcurrencyToken(); 
             modelBuilder.Entity<Flights>().OwnsOne(f => f.Departure);
             modelBuilder.Entity<Flights>().OwnsOne(f => f.Arrival);
+            modelBuilder.Entity<Flights>().OwnsMany(f => f.Bookings);
 
         }
 
