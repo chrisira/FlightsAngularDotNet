@@ -41,7 +41,9 @@ entities.Database.EnsureCreated();
 
 //seeding the data
 var  random = new Random();
-Flights[] flightsToSeed = new Flights[]
+if (!entities.Flights.Any())
+{
+    Flights[] flightsToSeed = new Flights[]
 {
 
                 new (Guid.NewGuid(),
@@ -94,9 +96,12 @@ Flights[] flightsToSeed = new Flights[]
                     random.Next(1, 853))
 
 };
-entities.Flights.AddRange(flightsToSeed);
+    entities.Flights.AddRange(flightsToSeed);
 
-entities.SaveChanges();
+    entities.SaveChanges();
+
+}
+
 
 
 // adding the CORS
