@@ -9,10 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add dbcontext
 builder.Services.AddDbContext<Entities>(options =>
-options.UseNpgsql(builder.Configuration.GetConnectionString("flights")),
-ServiceLifetime.Singleton
-
-) ;
+options.UseSqlServer(builder.Configuration.GetConnectionString("sql")));
 
 // Add services to the container.
 
@@ -31,12 +28,16 @@ builder.Services.AddSwaggerGen( c =>
     c.CustomOperationIds(e => $"{e.ActionDescriptor.RouteValues["action"] + e.ActionDescriptor.RouteValues["controller"]}");
 });
 
-builder.Services.AddSingleton<Entities>();
+builder.Services.AddScoped<Entities>();
 var app = builder.Build();
 
 
 // creating the instance of entities after the build
-var entities = app.Services.CreateScope().ServiceProvider.GetService<Entities>();   
+var entities = app.Services.CreateScope().ServiceProvider.GetService<Entities>();
+
+//ensure the database is existing before doing any other thing
+entities.Database.EnsureCreated();
+
 
 //seeding the data
 var  random = new Random();
