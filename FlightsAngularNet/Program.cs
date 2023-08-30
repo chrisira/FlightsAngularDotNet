@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add dbcontext
 builder.Services.AddDbContext<Entities>(options =>
-options.UseInMemoryDatabase(databaseName: "Flights"),
+options.UseNpgsql(builder.Configuration.GetConnectionString("flights")),
 ServiceLifetime.Singleton
 
 ) ;
