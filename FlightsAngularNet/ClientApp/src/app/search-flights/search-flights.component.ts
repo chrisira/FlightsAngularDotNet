@@ -21,7 +21,7 @@ export class SearchFlightsComponent {
 
   }
   searchForm = this.fb.group({
-    source: [''],
+    from : [''],
     destination: [''],
     fromDate: [''],
     toDate: [''],
@@ -29,9 +29,20 @@ export class SearchFlightsComponent {
 
   })
 
+
   search() {
-    this.flightsService.searchFlights$Json({}).subscribe(response => this.SearchResult = response, this.HandleError);
-    
+    const searchFormValue = this.searchForm.value;
+
+    const searchParams = {
+      FromDate: searchFormValue.fromDate || '', // Provide a default empty string if it's null or undefined
+      ToDate: searchFormValue.toDate || '',
+      From: searchFormValue.from || '',
+      Destination: searchFormValue.destination || '',
+      NumberOfPassengers: searchFormValue.numberOfPassengers || 1 // Provide a default value (e.g., 0) if it's null or undefined
+    };
+
+    this.flightsService.searchFlights$Json(searchParams)
+      .subscribe(response => this.SearchResult = response, this.HandleError);
   }
   private HandleError(err: any) {
     console.log("error status code " + err.status);

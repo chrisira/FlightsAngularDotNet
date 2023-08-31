@@ -30,7 +30,7 @@ namespace FlightsAngularNet.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         [ProducesResponseType(typeof(IEnumerable<FlightsRm>), 200)]
-        public IEnumerable<FlightsRm> Search(FlightSearchParameters @params)
+        public IEnumerable<FlightsRm> Search([FromQuery]  FlightSearchParameters @params)
         {
             var FlightRmList = _entities.Flights.Select(flight => new FlightsRm(
                 flight.Id,
