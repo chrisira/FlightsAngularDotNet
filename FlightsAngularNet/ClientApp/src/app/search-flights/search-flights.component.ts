@@ -28,6 +28,10 @@ export class SearchFlightsComponent {
     numberOfPassengers:[1]
 
   })
+  ngOnInit(): void {
+    this.search()
+
+  }
 
 
   search() {
