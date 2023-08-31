@@ -4,6 +4,7 @@ import { FlightsService } from './../api/services/flights.service'
 
 // importing the Flights Read Model
 import { FlightsRm } from '../api/models';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-search-flights',
@@ -16,9 +17,17 @@ export class SearchFlightsComponent {
 
   // adding a constructor
 
-  constructor(private flightsService:FlightsService) {
+  constructor(private flightsService: FlightsService, private fb: FormBuilder) {
 
   }
+  searchForm = this.fb.group({
+    source: [''],
+    destination: [''],
+    fromDate: [''],
+    toDate: [''],
+    numberOfPassengers:[1]
+
+  })
 
   search() {
     this.flightsService.searchFlights$Json({}).subscribe(response => this.SearchResult = response, this.HandleError);
