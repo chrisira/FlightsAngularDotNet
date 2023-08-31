@@ -32,6 +32,7 @@ namespace FlightsAngularNet.Controllers
         [ProducesResponseType(typeof(IEnumerable<FlightsRm>), 200)]
         public IEnumerable<FlightsRm> Search([FromQuery]  FlightSearchParameters @params)
         {
+            _logger.LogInformation("searching a flight for the destination {Destination} ", @params.Destination);
             var FlightRmList = _entities.Flights.Select(flight => new FlightsRm(
                 flight.Id,
                 flight.Price,
